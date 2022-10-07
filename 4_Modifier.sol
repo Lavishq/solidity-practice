@@ -29,7 +29,8 @@ contract Modifier {
         s_owner = msg.sender;
     }
 
-    function withdraw() public payable onlyOwner {
+    function withdraw(uint256 _amount) public payable onlyOwner {
+        balances[msg.sender] -= _amount;
         (bool sent, ) = payable(msg.sender).call{value: address(this).balance}(
             ""
         );
